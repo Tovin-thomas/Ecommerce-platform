@@ -23,6 +23,7 @@ def show_account(request):
                 phone=request.POST.get('phone')
                 user=User.objects.create_user(username=username,password=password,email=email)
                 customer=Customer.objects.create(
+                name = username,
                 user=user,
                 phone=phone,
                 address=address
