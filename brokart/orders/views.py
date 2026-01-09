@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
 from .models import Order,OrderedItem
 from products.models import Product
 from customers.models import Customer
@@ -79,3 +80,10 @@ def checkout_cart(request):
     else:
         messages.error(request, 'Order is not processed')
     return redirect('cart')
+@login_required(login_url='account')
+def showorders(request):
+    user = request.user
+    customer = user.customer_profile
+    all_orders=Order.objects.filter(owner=customer).exclude(order_status=Order.CART_STAGE)
+    context={'orders':all_orders}
+    return render(request, 'orders.html', context)

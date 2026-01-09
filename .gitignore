@@ -6,3 +6,8 @@ db.sqlite3
 .vscode/
 media/
 static_cdn/
+venv/
+__pycache__/
+*.pyc
+db.sqlite3
+.agent/
